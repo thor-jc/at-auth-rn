@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alloatech.at-auth-rn"
+    },
+    "android": {
+      "package": "com.alloatech.atauthrn"
+      }
   }
 }
