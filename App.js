@@ -1,8 +1,10 @@
 import { KeepAwake, registerRootComponent } from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
 
-import LoginScreen from './src/screens/LoginScreen';
+import store from './src/store';
+import AuthScreen from './src/screens/AuthScreen';
 
 class App extends React.Component {
 
@@ -14,11 +16,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Provider store={store}>
+        <View style={styles.container}>
           <Text>HEY</Text>
-          <LoginScreen />
+          <AuthScreen />
           <Text>WTF</Text>
-      </View>
+        </View>
+      </Provider>
     );
   }
 }
@@ -32,5 +36,5 @@ const styles = StyleSheet.create({
     marginTop: 25
   },
 });
-
-export default registerRootComponent(App);
+export default App;
+//export default registerRootComponent(App);

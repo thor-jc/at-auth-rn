@@ -1,71 +1,96 @@
-import axios from 'axios';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {
-  FormLabel,
-  FormInput,
-  Button,
-  FormValidationMessage
-} from 'react-native-elements';
+import { Text, View, Modal } from 'react-native';
+import { connect } from 'react-redux';
+import firebase from 'firebase';
+import { Card, Input, Button } from 'react-native-elements';
 
-const ROOT_URL = 'https://t57mokqay8.execute-api.us-west-2.amazonaws.com/dev/';
+import * as actions from '../../actions';
+import { Spinner } from '../common/Spinner';
+import { APP_LOADING, USER_LOGIN, USER_LOGIN_FAILED, USER_LOGIN_SUCCESS,
+    USER_NAME, PASSWORD } from '../../actions/types';
 
-export default class SignInForm extends Component {
-    state = { phone: '', code: '', token: '', error: '' };
+class LoginForm extends Component {
 
-    handleGetCode = () => {
-      this.setState({ error: '' });
-      axios.post(`${ROOT_URL}/users/send`, { phone: this.state.phone })
-        .catch(res => this.setState({ error: res.response.data.error }));
+  onButtonPress = () => {
+    const { username, password } = this.props.auth;
+
+    this.props.loginEvent(USER_LOGIN);
+    this.props.loadingApp(true);
+
+    // firebase.auth().signInWithEmailAndPassword(username, password)
+    //   .then(this.onLoginSuccess)
+    //   .catch(() => {
+    //     firebase.auth().createUserWithEmailAndPassword(username, password)
+    //       .then(this.onLoginSuccess)
+    //       .catch(this.onLoginFail);
+    //   });
+  }
+
+  onLoginFail = () => {
+    this.props.loginEvent(USER_LOGIN_FAILED, { error: 'Authentication Failed', loading: false });
+  }
+
+  onLoginSuccess = () => {
+    this.props.loginEvent(USER_LOGIN_SUCCESS, {
+      username: '',
+      password: '',
+      loading: false,
+      error: ''
+    });
+  }
+
+  renderButton = () => {
+    if (this.props.auth.loading) {
+      return <Spinner size="small" />;
     }
 
-    handleSubmitCode = () => {
-      this.setState({ error: '' });
-      const { phone, code } = this.state;
-      axios.post(`${ROOT_URL}/users/verify`, { code, phone })
-        .then(res => this.setState({ token: res.data.token }))
-        .catch(res => this.setState({ error: res.response.data.error }));
-    }
+    return (
+      <Button onPress={this.onButtonPress}>
+        Log in
+      </Button>
+    );
+  }
 
-    render() {
-      return (
-        <View style={styles.container}>
-          <Text>Get a Code</Text>
-          <View style={styles.formWrapper}>
-            <FormLabel>Phone Number</FormLabel>
-            <FormInput
-              value={this.state.phone}
-              keyboardType="phone-pad"
-              onChangeText={phone => this.setState({ phone })}
-            />
-            <FormValidationMessage>{this.state.error}</FormValidationMessage>
-          </View>
-          <Button onPress={this.handleGetCode} title="Submit" />
-
-          <Text>Submit a code</Text>
-          <View style={styles.formWrapper}>
-            <FormLabel>Code</FormLabel>
-            <FormInput
-              keyboardType="phone-pad"
-              onChangeText={code => this.setState({ code })}
-            />
-            <FormValidationMessage>{this.state.error}</FormValidationMessage>
-          </View>
-          <Button onPress={this.handleSubmitCode} title="Submit" />
-          <View>
-            <Text>My Token: {this.state.token}</Text>
-          </View>
-        </View>
-      );
-    }
+  render() {
+    return (
+      <View style={{ marginTop: 22 }}>
+        <Modal>
+          <Card>
+              <Input
+                leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+                placeholder="user@gmail.com"
+                label="Email"
+                value={this.props.auth.username}
+                onChangeText={(text) => this.props.handleFieldChange({ type: USER_NAME, text })}
+              />
+              <Input
+                secureTextEntry
+                placeholder="password"
+                label="Password"
+                value={this.props.auth.password}
+                onChangeText={(text) => this.props.handleFieldChange({ type: PASSWORD, text })}
+              />
+            <Text style={styles.errorTextStyle}>
+              {this.props.auth.error}
+            </Text>
+            {this.renderButton()}
+          </Card>
+        </Modal>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  formWrapper: {
-    marginBottom: 20
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
   }
-});
+};
+
+export default connect(mapStateToProps, actions)(LoginForm);
