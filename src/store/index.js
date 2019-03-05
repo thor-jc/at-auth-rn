@@ -1,14 +1,9 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-
-import reducers from '../reducers';
+import { createStore } from 'redux-dynamic-modules';
+import { getThunkExtension } from 'redux-dynamic-modules-thunk';
 
 const store = createStore(
-  reducers,
   {},
-  compose(
-    applyMiddleware(thunk)
-  )
+  [getThunkExtension()]
 );
 
 export default store;

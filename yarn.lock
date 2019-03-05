@@ -5745,6 +5745,29 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
+redux-devtools-extension@^2.13.7:
+  version "2.13.8"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
+  integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
+
+redux-dynamic-middlewares@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-dynamic-middlewares/-/redux-dynamic-middlewares-1.0.0.tgz#a4c5859a6018a1d7fab3bdd4989f51095c806d15"
+  integrity sha512-smX1eY17dH90FVtXL6JPW01on1ptP4SOlkDYON5Lka52RNcZfgWM6hvtoZKA3O+dZL2/ytbS+tHo2gdKln5iHw==
+
+redux-dynamic-modules-thunk@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/redux-dynamic-modules-thunk/-/redux-dynamic-modules-thunk-3.4.4.tgz#2758925e0560f027826e0e1fc6c5b67306a6898a"
+  integrity sha512-RIjP2/BaD2B1niDSsize5MGgIGuGi3gcxD3KWM54DWoJuPf1euruoaPeVM0trYFtSXU+F2InDmDYp5dkZJENRA==
+
+redux-dynamic-modules@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/redux-dynamic-modules/-/redux-dynamic-modules-3.4.4.tgz#f9d577ac75f048d7337ce242a314ac016a71a5bd"
+  integrity sha512-h67ZSIikvQPjzud0XqtOsNAMOSMcWAE7T2qehDlufjABhAS0ZTXk0I2JZeCK+71Fug0BpUzqh26dWXs/JNQSvg==
+  dependencies:
+    redux-devtools-extension "^2.13.7"
+    redux-dynamic-middlewares "^1.0.0"
+
 redux-thunk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"

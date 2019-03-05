@@ -1,4 +1,3 @@
-import { KeepAwake, registerRootComponent } from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
@@ -9,9 +8,6 @@ import AuthScreen from './src/screens/AuthScreen';
 class App extends React.Component {
 
   componentWillMount() {
-    if (__DEV__) {  // eslint-disable-line no-undef
-      KeepAwake.activate();
-    }
   }
 
   render() {
@@ -37,4 +33,3 @@ const styles = StyleSheet.create({
   },
 });
 export default App;
-//export default registerRootComponent(App);
