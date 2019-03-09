@@ -1,7 +1,8 @@
 {
   "name": "at-auth-rn",
   "version": "0.0.7",
-  "main": "src/index.js",
+  "main-old": "src/index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -13,6 +14,7 @@
     "expo": "^32.0.6",
     "firebase": "^5.8.5",
     "react": "16.5.0",
+    "react-loadable": "^5.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
     "react-native-vector-icons": "^6.3.0",

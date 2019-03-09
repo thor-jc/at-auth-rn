@@ -8,6 +8,7 @@ import AuthScreen from './src/screens/AuthScreen';
 class App extends React.Component {
 
   componentWillMount() {
+    console.log('Opening App');
   }
 
   render() {

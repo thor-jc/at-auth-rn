@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, Modal } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 import { Card, Input, Button } from 'react-native-elements';
 
-import * as actions from '../../actions';
 import { Spinner } from '../common/Spinner';
-import { APP_LOADING, USER_LOGIN, USER_LOGIN_FAILED, USER_LOGIN_SUCCESS,
-    USER_NAME, PASSWORD } from '../../actions/types';
+import { USER_LOGIN, USER_LOGIN_FAILED, USER_LOGIN_SUCCESS,
+    USER_NAME, PASSWORD } from './redux/auth-action';
 
 class LoginForm extends Component {
 
   onButtonPress = () => {
-    const { username, password } = this.props.auth;
+    //const { username, password } = this.props.auth;
 
     this.props.loginEvent(USER_LOGIN);
     this.props.loadingApp(true);
@@ -93,4 +92,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, actions)(LoginForm);
+export default connect(mapStateToProps)(LoginForm);

@@ -5,13 +5,13 @@ import {
   USER_LOGIN_FAILED,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_EXPIRED
-} from '../actions/types';
+} from './auth-action';
 
 const INITIAL_STATE = {
   isLoading: false
 };
 
-export default function (state = INITIAL_STATE, action) {
+export const AuthReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_LOGIN:
       return state;
@@ -25,4 +25,4 @@ export default function (state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
+};
